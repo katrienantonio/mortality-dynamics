@@ -40,7 +40,7 @@ The schedule is subject to small changes.
 
 | Description                                | Lecture material                                                                                                                                 | R script                                                                                          | R solutions                                                                |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Computer lab 1 - Getting mortality data | [sheets data](https://katrienantonio.github.io/mortality-dynamics/sheets/AlIM_computer_lab_1.html#data)               | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R)       | |
+| Computer lab 1 - Getting mortality data | [sheets data](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_1.html#data)               | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R)       | |
 | Computer lab 1 - Parametric mortality laws                               | [sheets mortality laws](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_1.html#parametric)              | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R)      |  |
 
 

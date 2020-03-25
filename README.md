@@ -6,8 +6,8 @@ by Katrien Antonio, Bavo Campo and Sander Devriendt.
 Course materials for the *Advanced Life Insurance Mathematics* course
 taught in academic year 2019-2020 at KU Leuven.
 
-📆 March - June, 2020 <br> 🕥 approx. 3h per computer lab <br> 📌 Advanced
-Life Insurance Mathematics class at KU Leuven
+📆 March - June, 2020 <br> 🕦 approx. 2-3h per computer lab <br> 📌
+Advanced Life Insurance Mathematics class at KU Leuven
 
 ## Goals of the computer labs
 
@@ -21,7 +21,7 @@ The schedule is subject to small changes.
 
 | Description                                | Lecture material                                                                                                        | R script                                                                                    | R solutions |
 | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------- |
-| Computer lab 1 - Getting mortality data    | [sheets data](https://katrienantonio.github.io/mortality-dynamics/sheets/AlIM_computer_lab_1.html#data)                 | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R) |             |
+| Computer lab 1 - Getting mortality data    | [sheets data](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_1.html#data)                 | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R) |             |
 | Computer lab 1 - Parametric mortality laws | [sheets mortality laws](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_1.html#parametric) | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R) |             |
 
 ## Software requirements
