@@ -8,6 +8,9 @@
 # install.packages("demography")
 library(tidyverse)
 library(demography)
+# install.packages("rstudioapi")
+dir <- dirname(rstudioapi::getActiveDocumentContext()$path)
+setwd(dir)
 
 # colors - I copied most of these from # https://github.com/edrubin/EC524W20
 KULbg <- "#116E8A"
@@ -41,13 +44,13 @@ min(Df$age)
 max(Df$age)
 
 ## -------------------------------------------------------------------------------
-Belgium_female_2018 = read.table(file = "./data/Belgium_female_2018.txt", header = TRUE)
+Belgium_female_2018 = read.table(file = "../data/Belgium_female_2018.txt", header = TRUE)
 
 ## -------------------------------------------------------------------------------
 head(Belgium_female_2018)
 
 ## -------------------------------------------------------------------------------
-Belgium_male_2018 = read.table(file = "./data/Belgium_male_2018.txt", header = TRUE)
+Belgium_male_2018 = read.table(file = "../data/Belgium_male_2018.txt", header = TRUE)
 
 ## -------------------------------------------------------------------------------
 KULbg <- "#116E8A"
