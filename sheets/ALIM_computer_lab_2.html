@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Advanced Life Insurance Mathematics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Katrien Antonio, Bavo Campo and Sander Devriendt" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css\metropolis.css" type="text/css" />
+    <link rel="stylesheet" href="css\metropolis-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css\my-css.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Advanced Life Insurance Mathematics
+## Computer lab on the Lee Carter model
+<html>
+<div style="float:left">
+
+</div>
+<hr align='center' color='#116E8A' size=1px width=97%>
+</html>
+### Katrien Antonio, Bavo Campo and Sander Devriendt
+### <a href="https://www.github.com/katrienantonio/mortality-dynamics">Workshop mortality dynamics</a> | March, 2020
+
+---
+
+
+
+
+
+
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+name: introduction
+
+# Introduction
+
+### Workshop
+
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 496 512"&gt;&lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/&gt;&lt;/svg&gt; https://github.com/katrienantonio/mortality-dynamics
+
+The workshop repo on GitHub, where we upload presentation, code, data sets, etc.
+
+--
+
+### Us
+
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 512 512"&gt;&lt;path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/&gt;&lt;/svg&gt; [https://katrienantonio.github.io/](https://katrienantonio.github.io/)
+
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 512 512"&gt;&lt;path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/&gt;&lt;/svg&gt; [katrien.antonio@kuleuven.be](mailto:katrien.antonio@kuleuven.be) &amp;  [bavo.decock@kuleuven.be](mailto:bavo.decock@kuleuven.be) &amp;
+Sander Devriendt
+
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 640 512"&gt;&lt;path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/&gt;&lt;/svg&gt; (Katrien) Professor in insurance data science
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 640 512"&gt;&lt;path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/&gt;&lt;/svg&gt; (Bavo) PhD student in insurance data science
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 640 512"&gt;&lt;path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/&gt;&lt;/svg&gt; (Sander) former PhD student, now with NBB (Brussels, Belgium)
+
+
+---
+
+name: checklist
+
+# Checklist
+
+☑ Do you have a fairly recent version of R?
+  
+  ```r
+  version$version.string
+  ```
+
+☑ Do you have a fairly recent version of RStudio? 
+  
+  ```r
+  RStudio.Version()$version
+  ## Requires an interactive session but should return something like "[1] ‘1.2.5001’"
+  ```
+
+☑ Have you installed the R packages listed in the software requirements? 
+  
+
+---
+
+class: inverse, center, middle
+name: goals 
+
+# Goals of the workshop
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Goals of the workshop
+
+.pull-left[
+
+This computer lab allows you to: 
+
+* visualize concepts discussed in ALIM classes
+
+* improve intuition on these concepts
+
+* translating the ALIM concepts to code
+
+* spend time with R code provided. 
+
+You hereby focus on:
+
+* the Lee Carter model
+
+* forecasting the fitted period effects with a random walk with drift.
+
+]
+
+.pull-right[
+Outline of the workshop: 
+
+* [Prologue](#prologue)
+
+* [Download and import mortality data](#data)
+
+* [Fit Lee Carter with iterative LS](#LS)
+
+* [Fit Lee Carter by maximizing a Poisson likelihood](#POI)
+
+* [Forecasting](#forecasting)
+
+
+]
+
+---
+
+class: inverse, center, middle
+name: data
+
+# Download and import mortality data
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Life table from HMD
+
+We download the life table for males in Belgium, as available on the HMD. 
+
+We store this table as a .txt and import the data in R.  
+
+
+```r
+library(readr)
+Belgium_male_1x1 &lt;- readr::read_delim(
+                    file = "./data/Belgium_male_life_table_1x1.txt", 
+                    delim = " ", col_types = "nnnnnnnnnn", 
+                    col_names = FALSE, skip = 1)
+
+names(Belgium_male_1x1) &lt;- c("Year", "Age", "mx", "qx", "ax", "lx", "dx", "Lx", "Tx", "ex")
+```
+
+We use the {readr} package to control the column types when importing the data. We use the `col_types` argument. 
+
+Here, `n` refers to numeric; each of the 10 columns in the data is numeric. 
+
+`skip = 1` indicates that the first line (with the variable names) should be skipped when reading the input file.   
+
+(This table was downloaded from the HMD on March 30, 2020.)
+
+---
+
+class: clear
+
+.pull-left[
+Variables stored in the life table:
+
+
+```r
+names(Belgium_male_1x1)
+##  [1] "Year" "Age"  "mx"   "qx"   "ax"   "lx"   "dx"   "Lx"   "Tx"   "ex"
+```
+
+Range of years:
+
+
+```r
+min(Belgium_male_1x1$Year)
+## [1] 1841
+max(Belgium_male_1x1$Year)
+## [1] 2018
+```
+
+Range of ages:
+
+
+```r
+min(Belgium_male_1x1$Age)
+## [1] 0
+max(Belgium_male_1x1$Age)
+## [1] 110
+```
+]
+
+.pull-right[
+In the demos following next, we will only use the data from `start_year` on, e.g.
+
+
+```r
+library(dplyr)
+start_year &lt;- 1950 
+end_year &lt;- max(Belgium_male_1x1$Year)
+Belgium_male &lt;- filter(Belgium_male_1x1, 
+                            Year &gt;= start_year)
+
+Belgium_male %&gt;% select(Year, Age, mx, 
+                             qx, lx, dx, ex) %&gt;% 
+  slice(1:4) %&gt;% kable(format = 'html')
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Year &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Age &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mx &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; qx &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lx &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; dx &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ex &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1950 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06180 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.05900 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5900 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 63.81 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1950 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00381 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00380 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 94100 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 358 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 66.80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1950 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00214 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00214 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 93742 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 66.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1950 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00162 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00162 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 93542 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 151 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 65.19 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+---
+
+class: inverse, center, middle
+name: LS
+
+# Fitting the Lee Carter model with an iterative least squares approach
+
+---
+
+# The Lee Carter model with an iterative LS approach
+
+We assume `\(\mu_{x,t} = m_{x,t}\)`, which holds under the assumption of a piecewise constant force of mortality.
+
+In the Lee Carter model we propose the following parametric expression for `\(\log{m_{x,t}}\)`:
+
+`$$m_{x,t} = \exp{(\beta_x^{(1)} + \beta_x^{(2)} \cdot \kappa_t^{(2)})}.$$`
+We first demonstrate how to estimate the unknown parameters `\(\beta_x^{(1)}\)`, `\(\beta_x^{(2)}\)` and `\(\kappa_t^{(2)}\)` by minimizing:
+
+`$$\sum_{x,t} \left( \log m_{x,t} - \beta_x^{(1)} - \beta_x^{(2)} \cdot \kappa_t^{(2)} \right)^2.$$`
+
+Thus, we calibrate the parameters by minimizing the squared differences between the observed death rates and the proposed Lee Carter expression.
+
+---
+
+# The Lee Carter model with an iterative LS approach 
+
+We implement the following .hi-pink[iterative LS strategy]: 
+
+(1) `\(\hat{\beta}_x^{(1)} = \frac{1}{T} \sum_t \log m_{x,t}\)`, an analytic expression, with `\(T\)` the number of years used in the calibration period
+
+(2) define `\(Z_{x,t} = \log m_{x,t} - \hat{\beta}_x^{(1)}\)`, then 
+we iteratively solve for `\(\beta_x^{(2)}\)` and `\(\kappa_t^{(2)}\)`.
+
+In step (1): 
+
+* ignoring the `\(\beta_x^{(2)} \cdot \kappa_t^{(2)}\)` we simply fit a linear model with age-specific intercept to the response, `\(\log{m_{x,t}}\)`
+
+In step (2): 
+
+* fixing `\(\beta_x^{(2)}\)` we fit a linear model to `\(Z_{x,t}\)` where the numeric `\(\beta_x^{(2)}\)` (for each record in `\(Z_{x,t}\)`) interacts with the factor year covariate, this gives us updated `\(\hat{\kappa}_t^{(2)}\)`
+
+* fixing `\(\kappa_t^{(2)}\)` we fit a linear model to `\(Z_{x,t}\)` where the numeric `\(\kappa_t^{(2)}\)` (for each record in `\(Z_{x,t}\)`) interacts with the factor age covariate, this gives us updated `\(\hat{\beta}_x^{(2)}\)`.
+
+---
+
+class: clear
+
+.pull-left[
+
+We fit `\(\hat{\beta}^{(1)}_x\)` for each age in the data set.
+
+We fit a linear model with age specific intercept. 
+
+This goes as follows:
+
+
+```r
+X &lt;- model.matrix(
+          ~ as.factor(Belgium_male$Age) 
+          - 1)
+dim(X)
+## [1] 7659  111
+y &lt;- log(Belgium_male$mx)
+
+alpha_est_expl &lt;- solve(
+          crossprod(X)) %*% 
+                   t(X) %*% y # DIY
+alpha_est &lt;- lm(
+              y ~ -1 + 
+              as.factor(Belgium_male$Age))$coef 
+              # use lm(.) function
+              # extract $coef from the fitted 
+              # lm(.) object
+```
+
+We plot the resulting parameter estimates on the right.
+
+]
+
+.pull-right[
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-9-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+We .hi-pink[initialize] the estimation of the `\(\kappa_t^{(2)}\)`'s as follows.
+
+First, we create the new response variable `\(Z_{x,t}\)`. 
+
+Keep the dimension and specification of `Belgium_male$mx` in mind when subtracting the `\(\hat{\beta}_x^{[1]}\)`!
+
+
+```r
+Z &lt;- log(Belgium_male$mx) - 
+     alpha_est[Belgium_male$Age - 
+                 min(Belgium_male$Age) + 1]
+
+X &lt;- model.matrix(~ as.factor(Belgium_male$Year) - 1)
+
+kappa_est_expl &lt;- solve(crossprod(X)) %*% t(X) %*% Z
+
+kappa_est &lt;- lm(
+              Z ~ -1 + 
+              as.factor(Belgium_male$Year))$coef 
+```
+
+We plot the resulting parameter estimates on the right.
+
+]
+
+.pull-right[
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-11-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+We .hi-pink[initialize] the estimation of the `\(\beta_x^{(2)}\)`'s as follows:
+
+
+```r
+var_kappa &lt;- kappa_est[Belgium_male$Year - 
+                         min(Belgium_male$Year) + 1]
+
+X &lt;- model.matrix(~ 
+              as.factor(Belgium_male$Age):var_kappa 
+              - 1)
+
+beta_est_expl  &lt;- solve(crossprod(X)) %*% t(X) %*% Z 
+
+beta_est &lt;- lm(
+          Z ~ -1 + 
+          as.factor(Belgium_male$Age):var_kappa)$coef 
+```
+
+Mind the interaction constructed`:
+
+`var_kappa` is a numeric variable with the same length as `Z`
+
+via `as.factor(Belgium_male$Age):var_kappa` we build the interaction between this variable and an age-specific intercept. 
+
+]
+
+.pull-right[
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-13-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: clear
+
+
+```r
+converged = F
+iter      = 1
+
+while(!converged){  
+  beta_est_old  = beta_est
+  kappa_est_old = kappa_est
+  
+  # (2): estimate kappa's
+  var_beta = beta_est[Belgium_male$Age - min(Belgium_male$Age) + 1]
+  X        = model.matrix(~ `as.factor(Belgium_male$Year):var_beta` - 1)
+  kappa_est = solve(crossprod(X)) %*% t(X) %*% Z
+
+  # (3): estimate beta's
+  var_kappa = kappa_est[Belgium_male$Year - min(Belgium_male$Year) + 1]
+  X         = model.matrix(~ `as.factor(Belgium_male$Age):var_kappa` - 1)
+  beta_est   = solve(crossprod(X)) %*% t(X) %*% Z 
+
+  # stopping criterion
+  `converged =` 
+  `max(abs(beta_est - beta_est_old) / abs(beta_est_old), abs(kappa_est - kappa_est_old) / abs(kappa_est_old)) &lt; 1e-8`
+  iter = iter + 1
+  if(iter %% 1e2 == 0)
+    cat("\n\nIteration number", iter, "\n\n")
+}
+
+```
+
+
+
+---
+
+class: clear
+
+.pull-left[
+
+We plot the initial estimates and the parameter estimates obtained .hi-pink[after convergence]. 
+
+]
+
+.pull-right[
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-16-1.svg" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+We plot the initial estimates and the parameter estimates obtained .hi-pink[after convergence]. 
+
+]
+
+.pull-right[
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-17-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: clear
+
+Finally, we make sure the parameter estimates satisfy the (usual) set of Lee Carter .hi-pink[parameter constraints].
+
+That is
+
+`\begin{align*}
+\sum_t \kappa_t^{(2)} &amp;= 0 \\
+\sum_x \beta_x^{(2)} &amp;= 1.
+\end{align*}`
+
+
+```r
+## apply constraints ##
+beta_est_LS  = beta_est / sum(beta_est)
+kappa_est_LS = (kappa_est - mean(kappa_est)) * sum(beta_est)
+alpha_est_LS = alpha_est + beta_est * mean(kappa_est)
+```
+
+Final check
+
+
+```r
+sum(beta_est_LS)
+## [1] 1
+sum(kappa_est_LS)
+## [1] 4.107825e-14
+```
+
+---
+
+class: clear
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-20-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: clear
+
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-21-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse, middle, center
+name: POI
+
+# Fit the Lee Carter model by maximizing a Poisson likelihood
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+class: top
+
+# Maximizing a Poisson likelihood
+
+We put focus on the following Poisson model for the deaths `\(D_{x,t}\)`
+
+`\begin{align*}
+D_{x,t} &amp;\sim \text{POI}(e_{x,t} \cdot \mu_{x,t}) \\
+\mu_{x,t} &amp;= \exp{(\beta_x^{(1)}+\beta_x^{(2)} \cdot \kappa_t^{(2)})}.
+\end{align*}`
+
+The log-likelihood then follows:
+
+`$$L(\beta^{(1)},\beta^{(2)},\kappa^{(2)}) = \sum_{x} \sum_{t} \left[d_{xt}(\beta_x^{(1)}+\beta_x^{(2)}\cdot \kappa^{(2)}_t)-e_{xt}\exp{(\beta_x^{(1)}+\beta_x^{(2)}\cdot \kappa^{(2)}_t)}\right]+c.$$`
+
+Here, `\(d_{x,t}\)` and `\(e_{x,t}\)` are the observed deaths and exposures, respectively.
+
+---
+
+class: clear
+
+.pull-left[
+
+
+```r
+library(demography)
+country &lt;- c("BEL", "Belgium")
+user    &lt;- "vuulenbak42@hotmail.com"
+pw      &lt;- "testEAA"
+df      &lt;- hmd.mx(country[1], user , pw , country[2])
+years   &lt;- `1970:max(df$year)`
+ages    &lt;- `0:89`
+```
+
+
+
+
+```r
+df  &lt;- demography::extract.years(
+                      df, years = years)
+df  &lt;- demography::extract.ages(
+                      df, ages = ages, 
+                      combine.upper = FALSE)
+
+min(df$year)
+## [1] 1970
+max(df$year)
+## [1] 2018
+max(df$age)
+## [1] 89
+```
+]
+
+.pull-right[
+
+To construct the Poisson likelihood, we need observations on `\(d_{xt}\)` and `\(e_{xt}\)`. 
+
+We specify the calibration period as `years`.
+
+We specify the age range as `ages`.
+
+We use `extract.years` and `extract.ages` from the {demography} package to subset `df` accordingly.
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+
+```r
+etx &lt;- t(df$pop$male)
+dim(etx)
+## [1] 49 90
+
+dtx &lt;- etx * t(df$rate$male)
+dim(dtx)
+## [1] 49 90
+```
+
+]
+
+.pull-right[
+
+We extract the exposures and put these in `etx`. 
+
+Here, years are in the rows and ages in the columns of the list. `t(.)` is for matrix transpose. 
+
+The deaths are not directly stored in `df`, but follow from `\(m_{x,t} \cdot e_{x,t}\)`.
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+
+```r
+df &lt;- expand.grid(Year = years, Age = ages) 
+      # age 0 across all years, age 1 ...
+rates &lt;- dtx/etx 
+      # years in rows, ages in columns
+df$rates &lt;- log(as.vector(rates)) 
+      # age 0 across all years, age 1 ...
+names(df) &lt;- c("Year", "Age", "logRate")
+
+p &lt;- ggplot(df, 
+          aes(x = Age, y = logRate, group = Year)) + 
+     geom_line(aes(colour = Year), 
+               size = 1, linetype = 1) +
+     scale_colour_gradientn(colours = rainbow(10)) +
+     scale_x_continuous(
+                      breaks = 
+                      seq(ages[1], tail(ages, 1) + 1, 
+                      10)) +
+     theme_bw() + ylab(expression("log" ~ m[x])) + 
+     xlab("Age (x)") 
+p
+```
+
+]
+
+.pull-right[
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-27-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+class: clear
+
+In the `ALIM_computer_lab_2.R` we offer two implementations to optimize the Poisson likelihood with univariate Newton-Raphson steps. 
+
+(1) Own written routine `LCNRopt &lt;- function(dxt, ext, eps = 1e-4, maxiter = 1e4)`
+
+(2) The `fit701(ages, years, Etx, Dtx, matrix(1, length(years), length(ages)))` function from the `fitModels.R` script. 
+
+This function is written by prof. Andrew Cairns, see [LifeMetrics software](https://www.macs.hw.ac.uk/~andrewc/lifemetrics/).
+
+`fit701(.)` calibrates Lee Carter, `fit702(.)` fits the Renshaw Haberman model, `fit703(.)` the Age-Period-Cohort (APC) model, `fit705(.)` the CBD model, `fit706(.)` the CBD model with cohort effect, and so on. 
+
+---
+
+class: clear
+
+In both implementations, the following types of iterative steps are crucial:
+
+`$$\hat{\kappa}_t^{(k+1)} =  \hat{\kappa}_t^{(k)}-\frac{\sum_{x}\left[d_{xt}-e_{xt}\exp{(\hat{\alpha}_x^{(k+1)}+\hat{\beta}_x^{(k)}\hat{\kappa}_t^{(k)})}\right]\hat{\beta}_x^{(k)}}{-\sum_{x}e_{xt}\exp{(\hat{\alpha}_x^{(k+1)}+\hat{\beta}_x^{(k)}\hat{\kappa}_t^{(k)})}\left(\hat{\beta}_x^{(k)}\right)^2}.$$`
+
+We use parametrization `\(\mu_{x,t} = \exp{(\alpha_x + \beta_x \cdot \kappa_t)}\)` for ease of notation.
+
+Similar expressions are given in the lecture sheets for the other parameters.
+
+For example, in `fit701(.)` the function `llmax2D(.)` does the NR step for the period effect
+
+
+```r
+thetat = b2*ev*exp(b1+b3*g3)
+s1     = sum(dv*b2*wv)
+f0     = sum((exp(k20*b2)*thetat)*wv)-s1
+df0    = sum((exp(k20*b2)*b2*thetat)*wv)
+k21    = k20-f0/df0
+```
+
+
+---
+
+class: clear
+
+.pull-left[
+
+
+```r
+source('./scripts/fitModels.R')
+
+LCfit701 &lt;- `fit701(ages, years, etx, dtx,` 
+                    `matrix(1, length(years),`
+                              `length(ages)))`
+
+names(LCfit701)
+```
+
+
+```
+## -21530.77 -&gt; -20501.14  -&gt;-20314.4 
+## -20294.5 -&gt; -20294.31  -&gt;-20291.36 
+## -20290.4 -&gt; -20290.39  -&gt;-20290.1 
+## -20290.01 -&gt; -20290.01  -&gt;-20289.98 
+## -20289.97 -&gt; -20289.97  -&gt;-20289.96 
+## -20289.96 -&gt; -20289.96  -&gt;-20289.96 
+## -20289.96 -&gt; -20289.96  -&gt;-20289.96 
+## -20289.96 -&gt; -20289.96  -&gt;-20289.96
+```
+
+
+```
+##  [1] "beta1"       "beta2"       "beta3"       "kappa2"      "gamma3"     
+##  [6] "x"           "y"           "cy"          "wa"          "epsilon"    
+## [11] "mhat"        "ll"          "BIC"         "npar"        "mtxLastYear"
+```
+
+]
+
+.pull-right[
+
+We call `fit701(.)` from the `fitModels.R` script.
+
+We store the results in the object `LCfit701`. 
+
+Useful attributes in this object are: 
+
+- `beta1` the estimates for `\(\beta_x^{(1)}\)` (or `\(\alpha_x\)`)
+- `beta2` the estimates for `\(\beta_x^{(2)}\)` (or `\(\beta_x\)`)
+- `kappa2` the estimates for `\(\kappa_t^{(2)}\)` (or `\(\kappa_t\)`)
+- the BIC
+- `epsilon` the residuals 
+- `mhat` the fitted `\(\hat{m}_{x,t}\)`.
+
+The residuals are Pearson residuals for a Poisson setting
+
+
+```r
+epsilon = (dtx-etx * mhat)/sqrt(etx * mhat)
+```
+
+
+]
+
+---
+
+class: clear
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-33-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: clear
+
+.pull-left[
+If you find the steps in `fit701(.)` too overwhelming you can take a look at our DIY routine `LCNRopt(.)`
+
+
+```r
+LeeCarterNR &lt;- LCNRopt(dxt   = t(Dtx),
+                       ext   = t(Etx), 
+                       eps = 1e-4, maxiter = 2e3)
+```
+
+where you recognize similar univariate NR steps to update the parameter estimates
+
+
+```r
+K0i = K1i
+K1i = K0i - 
+(sum( (dxti -  exti * exp(B1 + B2 * K0i)) * B2 ))  / 
+          - (sum(exti * exp(B1 + B2 * K0i) * B2^2))
+```
+
+]
+
+.pull-right[
+
+Let's have a look at the parameter estimates obtained with this routine!
+
+]
+
+---
+
+class: clear
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-36-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: clear
+
+.pull-left[
+
+We construct a {ggplot2} heatmap of the residuals produced by `fit701(.)`.
+
+
+```r
+grid &lt;- expand.grid(period = years, age = ages)
+grid$res &lt;- as.vector(LCfit701$epsilon)
+names(grid) &lt;- c("Year", "Age", "Residual")
+
+p &lt;- ggplot(grid, aes(x = Year, y = Age)) + 
+     geom_tile(aes(fill = Residual)) +
+     scale_fill_gradientn(colours =  topo.colors(7)) +
+     theme_bw() + 
+     theme(legend.position = "bottom",
+           legend.title = element_text(size = 15))
+p
+```
+
+
+
+
+```r
+head(grid)
+##   Year Age   Residual
+## 1 1970   0  7.9057034
+## 2 1971   0  5.9636049
+## 3 1972   0  2.9845978
+## 4 1973   0  0.2741458
+## 5 1974   0  2.9748547
+## 6 1975   0 -0.9675698
+```
+
+
+]
+
+.pull-right[
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-40-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+For a more in depth discussion of .hi-pink[cohort effects], we refer to Cairns et al. (2009) on [A quantitative comparison of stochastic mortality models using data from England and Wales and the United States](http://www.macs.hw.ac.uk/~andrewc/papers/naaj2009.pdf).
+
+In the longer version of this paper (available [online](http://www.macs.hw.ac.uk/~andrewc/papers/ajgc50.pdf)) the authors discuss the plot shown on the right (Figure 3 on page 7). 
+
+This is often used as the rationale for including cohort effects in mortality forecasting models. 
+
+However, calibrating and forecasting such cohort effects comes with a lot of difficulties (as discussed in class)!
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="img/cohort_effect_Cairns.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+This Figure shows .hi-pink[improvement rates] in mortality for England &amp; Wales by calendar year and age relative to mortality rates at the same age in the previous year. Red cells
+imply that mortality is deteriorating; green small rates of improvement, and blue
+and white strong rates of improvement. 
+
+The black diagonal line follows the .hi-pink[progress of the 1930 cohort].
+
+
+]
+
+---
+
+class: clear
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-42-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+name: forecasting
+
+# Forecasting using a random walk with drift
+
+We use the ARIMA toolbox to find a suitable time series model for the fitted parameter estimates `\(\hat{\kappa}_t^{(2)}\)`. 
+
+We use the random walk with drift, or ARIMA(0,1,0), for the `\(\hat{\kappa}_t^{(2)}\)` in Lee Carter. 
+
+This implies
+
+`\begin{align*}
+\hat{\kappa}^{(2)}_t &amp;= \hat{\kappa}^{(2)}_{t-1}+\theta+\epsilon_t \\
+\epsilon_t &amp; \sim  N(0,\sigma^2),
+\end{align*}`
+
+where `\(\theta\)` is the drift parameter and `\(\epsilon_t\)` the i.i.d. error terms.
+
+We have to estimate the unknown parameters `\(\theta\)` and `\(\sigma^2\)`.
+
+---
+
+class: clear
+
+.pull-left[
+
+
+```r
+library(forecast)
+
+time_series &lt;- Arima(LCfit701$kappa2, 
+                     order = c(0, 1, 0), 
+                     include.drift = TRUE)
+
+time_series
+## Series: LCfit701$kappa2 
+## ARIMA(0,1,0) with drift 
+## 
+## Coefficients:
+##         drift
+##       -1.9160
+## s.e.   0.2615
+## 
+## sigma^2 estimated as 3.353:  log likelihood=-96.64
+## AIC=197.29   AICc=197.55   BIC=201.03
+```
+
+]
+
+.pull-right[
+
+We use the {forecast} package to fit the RW with drift time series model to the calibrated `\(\hat{\kappa}^{(2)}_t\)` parameters.
+
+We use the `Arima(.)` function, with order `c(0,1,0)` to specify the random walk. 
+
+More general, in the `Arima(.)` function the components `(p, d, q)` are the AR order, the degree of differencing and the MA order.
+
+We put `include.drift = TRUE` to include the drift term.
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+
+```r
+plot(forecast(time_series, level = c(80, 85, 95)))
+```
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-44-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+We use the `forecast` function, together with the `time_series` object. 
+
+We put `level =  c(80, 85, 95)` to specify the confidence level for the prediction intervals. 
+
+The function `plot` produces a plot of the forecasts and prediction intervals. 
+
+]
+
+---
+
+# Projecting the force of mortality and mortality rates
+
+In the LifeMetrics code the script `simModels.R` includes the function `sim2001(.)` to project the fitted Lee Carter model.
+
+
+```r
+sim2001 &lt;- function(xx, yy, beta1v, beta2v, kappa2v, mtxLastYear, 
+                    nsim = 100, tmax = 20, nyears = 0, x0 = 65, fixStartPoint=FALSE)
+```
+
+Here: 
+
+* `xx` refers to the ages used in the fitting procedure
+* `yy` are the calendar years used in the fitting procedure
+* `beta1v, beta2v, kappa2v` the parameters fitted for the Lee Carter model
+* `nsim = 100` the number of paths generated and `tmax = 20` the forecasting horizon
+* `nyears` the number of years used to calibrate the RW with drift model.
+
+
+---
+
+class: clear
+
+.pull-left[
+
+```r
+source('./scripts/simModels.R')
+
+sim_LC = sim2001(
+  xx = LCfit701$x,
+  yy = LCfit701$y,
+  beta1v = LCfit701$beta1,
+  beta2v = LCfit701$beta2,
+  kappa2v = LCfit701$kappa2,
+  nsim = 10000,
+  tmax = 50,
+  nyears = length(years)
+)
+
+names(sim_LC)
+## [1] "y"   "xx"  "xv"  "mu2" "v22" "dda" "pa"  "tpa" "qaa"
+```
+]
+
+.pull-right[
+
+We call the `sim2001` function from the `simModels.R` script to generate scenarios for the random walk with draft.
+
+We store the results in the object `sim_LC`.
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+
+```r
+sim_LC$y
+##  [1] 2018 2019 2020 2021 2022 2023 2024 2025 2026 2027 2028 2029 2030 2031 2032
+## [16] 2033 2034 2035 2036 2037 2038 2039 2040 2041 2042 2043 2044 2045 2046 2047
+## [31] 2048 2049 2050 2051 2052 2053 2054 2055 2056 2057 2058 2059 2060 2061 2062
+## [46] 2063 2064 2065 2066 2067
+
+dim(sim_LC$dda)
+## [1]     1    50 10001
+
+sim_LC$dda[ , 1:50, 1]
+##  [1]  -50.61649  -52.53247  -54.44844  -56.36441  -58.28038  -60.19635
+##  [7]  -62.11232  -64.02829  -65.94426  -67.86023  -69.77620  -71.69217
+## [13]  -73.60815  -75.52412  -77.44009  -79.35606  -81.27203  -83.18800
+## [19]  -85.10397  -87.01994  -88.93591  -90.85188  -92.76785  -94.68382
+## [25]  -96.59980  -98.51577 -100.43174 -102.34771 -104.26368 -106.17965
+## [31] -108.09562 -110.01159 -111.92756 -113.84353 -115.75950 -117.67547
+## [37] -119.59145 -121.50742 -123.42339 -125.33936 -127.25533 -129.17130
+## [43] -131.08727 -133.00324 -134.91921 -136.83518 -138.75115 -140.66712
+## [49] -142.58310 -144.49907
+
+LCfit701$kappa2[length(years)]
+## [1] -50.61649
+
+dim(sim_LC$qaa)
+## [1]    90    50 10001
+```
+
+]
+
+.pull-right[
+
+`sim_LC$y` reveals that `sim_LC` stores results/simulations for years 2018 (including) until 2067. 
+
+`sim_LC$dda` is a list of dimensions (1, 50, 10001) where 50 refers to the length of `y`.
+
+`sim_LC$dda[ , , 1]` stores the best estimate path (with zero noise terms), then 10 000 paths are generated are stored. Each path starts from the most recent `\(\hat{\kappa}_t^{(2)}\)`.
+
+`sim_LC$qaa` is a list of dimensions (90, 50, 10001) where 90 is the number of ages used in the calibration data set. This stores the `\(q_{x,t}\)` for each age `\(x\)`, the projected time horizon (2018 - 2067, in our case), the best estimate and 10 000 generated scenarios.
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+
+```r
+# time series kappa_t
+plot(
+  LCfit701$y,
+  LCfit701$kappa2,
+  pch = 20,
+  xlim = c(1970, 2067),
+  ylim = range(c(
+    range(LCfit701$kappa2), range(sim_LC$dda[, , ])
+  )),
+  main = bquote(paste("Projection of ", kappa[t])),
+  sub = "ARIMA(0,1,0), 10000 sim",
+  xlab = "Year (t)",
+  ylab = bquote(kappa[t])
+)
+
+# fan chart
+fan(sim_LC$y, sim_LC$dda[, , ], color = "red")
+```
+
+We use the `fan(.)` function from the `simModels.R` script. The outer limits are the 5% and 95% quantiles for a given year or age. The bands in between are 5% quantiles. The darkest band in the middle encompasses the 45% to 55% quantile range.
+]
+
+.pull-right[
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-49-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+
+```r
+age = 65
+minage = min(ages)
+
+plot(
+  LCfit701$y,
+  exp(LCfit701$beta1[age - minage + 1] + 
+      LCfit701$beta2[age - minage + 1] * 
+      LCfit701$kappa2),
+  lwd = 2,
+  col = "red",
+  type = "l",
+  ylim = c(0, 0.04),
+  main = bquote(paste(
+    "Belgium: Lee-Carter, projection of ", mu[65](t)
+  )),
+  xlim = c(1970, 2068),
+  sub = "ARIMA(0,1,0), 10000 sim",
+  xlab = "Year (t)",
+  ylab = bquote(paste(mu[65](t)))
+)
+fan(sim_LC$y,
+    exp(LCfit701$beta1[age - minage + 1] + 
+        LCfit701$beta2[age - minage + 1] * 
+          sim_LC$dda[, , ]), col = "red")
+points(LCfit701$y, rates[, age - minage + 1], 
+       col = "black", pch = 20)
+
+```
+]
+
+.pull-right[
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-51-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: clear
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-52-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: clear
+
+&lt;img src="ALIM_computer_lab_2_files/figure-html/unnamed-chunk-53-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: clear
+
+.pull-left[
+
+For a more in depth discussion of the fan charts produced by a variety of LifeMetrics models, we refer to Cairns et al. (2011, IME) on [Mortality density forecasts: an analysis of six stochastic mortality models](https://www.macs.hw.ac.uk/~andrewc/papers/ajgc57.pdf).
+
+Quoting from page 13 in this paper: 
+
+With M1, the .hi-pink[age-85 fans are narrower than the age-65 fans]. (...) because it (=M1) has a single stochastic period effect, `\(\kappa_t^{(2)}\)`. For M1, the widths of the fans are proportional to the age effect, `\(\beta_x^{(2)}\)`, and this is unlikely to satisfy the criterion of biological reasonableness.
+
+Historical improvements have been lower at higher ages, forcing `\(\beta_x^{(2)}\)` to be
+lower at higher ages, so causing the fans at higher ages to be narrower, rather than wider.
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="img/fan_chart_M1_Cairns.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+]
+
+---
+
+# Thanks!  &lt;img src="img/xaringan.png" class="title-hex"&gt;
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+Slides created with the R package [xaringan](https://github.com/yihui/xaringan).
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+Course material available via 
+&lt;br&gt;
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 496 512"&gt;&lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/&gt;&lt;/svg&gt; https://github.com/katrienantonio/mortality-dynamics
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLanguage": "R",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"highlightSpans": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
