@@ -6,7 +6,7 @@ by Katrien Antonio, Bavo Campo and Sander Devriendt.
 Course materials for the *Advanced Life Insurance Mathematics* course
 taught in academic year 2019-2020 at KU Leuven.
 
-📆 March - June, 2020 <br> 🕘 approx. 2-3h per computer lab <br> 📌
+📆 March - June, 2020 <br> 🕒 approx. 2-3h per computer lab <br> 📍
 Advanced Life Insurance Mathematics class at KU Leuven
 
 ## Goals of the computer labs
