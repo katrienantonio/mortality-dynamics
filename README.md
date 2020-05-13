@@ -6,7 +6,7 @@ by Katrien Antonio, Bavo Campo and Sander Devriendt.
 Course materials for the *Advanced Life Insurance Mathematics* course
 taught in academic year 2019-2020 at KU Leuven.
 
-📆 March - June, 2020 <br> 🕜 approx. 2-3h per computer lab <br> 📌
+📆 March - June, 2020 <br> 🕘 approx. 2-3h per computer lab <br> 📌
 Advanced Life Insurance Mathematics class at KU Leuven
 
 ## Goals of the computer labs
@@ -26,6 +26,7 @@ The schedule is subject to small changes.
 | Computer lab 2 - Fitting Lee Carter with iterative LS       | [sheets iterative LS](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_2.html#LS)           | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_2.R) |             |
 | Computer lab 2 - Fitting Lee Carter with Poisson likelihood | [sheets Poisson](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_2.html#POI)               | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_2.R) |             |
 | Computer lab 2 - Forecasting with Lee Carter                | [sheets forecasting](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_2.html#forecasting)   | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_2.R) |             |
+| Computer lab 3 - Multiple state models                      | [sheets multi-state](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_3.html)               | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_3.R) |             |
 
 ## Software requirements
 

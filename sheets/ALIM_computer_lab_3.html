@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Advanced Life Insurance Mathematics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Katrien Antonio, Bavo Campo and Sander Devriendt" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css\metropolis.css" type="text/css" />
+    <link rel="stylesheet" href="css\metropolis-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css\my-css.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Advanced Life Insurance Mathematics
+## Computer lab on multiple state models
+<html>
+<div style="float:left">
+
+</div>
+<hr align='center' color='#116E8A' size=1px width=97%>
+</html>
+### Katrien Antonio, Bavo Campo and Sander Devriendt
+### <a href="https://www.github.com/katrienantonio/mortality-dynamics">Workshop mortality dynamics</a> | May, 2020
+
+---
+
+
+
+
+
+
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+name: introduction
+
+# Introduction
+
+### Workshop
+
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 496 512"&gt;&lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/&gt;&lt;/svg&gt; https://github.com/katrienantonio/mortality-dynamics
+
+The workshop repo on GitHub, where we upload presentation, code, data sets, etc.
+
+--
+
+### Us
+
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 512 512"&gt;&lt;path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/&gt;&lt;/svg&gt; [https://katrienantonio.github.io/](https://katrienantonio.github.io/)
+
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 512 512"&gt;&lt;path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/&gt;&lt;/svg&gt; [katrien.antonio@kuleuven.be](mailto:katrien.antonio@kuleuven.be) &amp;  [bavo.decock@kuleuven.be](mailto:bavo.decock@kuleuven.be) &amp;
+Sander Devriendt
+
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 640 512"&gt;&lt;path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/&gt;&lt;/svg&gt; (Katrien) Professor in insurance data science
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 640 512"&gt;&lt;path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/&gt;&lt;/svg&gt; (Bavo) PhD student in insurance data science
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 640 512"&gt;&lt;path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/&gt;&lt;/svg&gt; (Sander) former PhD student, now with NBB (Brussels, Belgium)
+
+
+---
+
+name: checklist
+
+# Checklist
+
+☑ Do you have a fairly recent version of R?
+  
+  ```r
+  version$version.string
+  ```
+
+☑ Do you have a fairly recent version of RStudio? 
+  
+  ```r
+  RStudio.Version()$version
+  ## Requires an interactive session but should return something like "[1] ‘1.2.5001’"
+  ```
+
+☑ Have you installed the R packages listed in the software requirements? 
+  
+
+---
+
+class: inverse, center, middle
+name: goals 
+
+# Goals of the workshop
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Goals of the workshop
+
+.pull-left[
+
+This computer lab allows you to: 
+
+* numerically evaluate concepts discussed in ALIM classes
+
+* improve intuition on these concepts
+
+* translating the ALIM concepts to code
+
+* spend time with R code provided. 
+
+You hereby focus on:
+
+* multiple state models
+
+* calculation of transition probabilities, premiums and policy values
+
+* via numerical integration methods and a (basic) solver for a set of differential equations.
+
+]
+
+.pull-right[
+Outline of the workshop: 
+
+* [Prologue](#prologue)
+
+* [Transition probabilities](#transitionprobs)
+
+* [Premium calculations](#premiums)
+
+* [Policy values](#policyvalues)
+
+.center[
+&lt;img src="img/DicksonHardy.jpg" width="30%" style="display: block; margin: auto;" /&gt;
+]
+
+
+]
+
+---
+
+class: inverse, center, middle
+name: transitionprobs
+
+# Transition probabilities 
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# The permanent disability model - Example 8.4
+
+
+.pull-left[ 
+
+Section 8.5 in the Dickson et al. (2013, 2nd edition) book puts focus on the numerical evaluation of transition probabilities in multiple state models. 
+
+We start with Example 8.4 on the .hi-pink[permanent disability model], as pictured on the right.
+
+We specify: 
+
+`\begin{align*}
+\mu_x^{01} &amp;= a_1+b_1\exp{(c_1x)} \\
+\mu_x^{02} &amp;= a_2+b_2\exp{(c_2x)} \\
+\mu_x^{12} &amp;= \mu_x^{02}.
+\end{align*}`
+
+The goal is then to calculate transition probabilities, e.g.
+
+`\begin{align*}
+_{10}p_{60}^{01}.
+\end{align*}`
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="img/perm_disability_model.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+]
+
+---
+
+class: clear
+
+We start from the following .hi-pink[sojourn probabilities] in the permanent disability model (cfr. the lecture sheets)
+
+`\begin{align*}
+_tp_{60}^{00} &amp;= \exp{\left\{-\int_0^t(\mu_{60+r}^{01}+\mu_{60+r}^{02})dr\right\}} = \exp{\left\{-\left((a_1+a_2)t+\frac{b_1}{c_1} e^{60c_1}(e^{c_1t}-1)+\frac{b_2}{c_2}e^{60c_2}(e^{c_2t}-1)\right)\right\}},
+\end{align*}`
+
+and
+
+`\begin{align*}
+_tp_{60}^{11} &amp;= \exp{\left\{-\int_0^t \mu_{60+r}^{12} dr\right\}} = \exp{\left\{-\left(a_2t+\frac{b_2}{c_2}e^{60c_2}(e^{c_2t}-1)\right)\right\}}.
+\end{align*}`
+
+--
+
+These expressions are then used to calculate `\(_tp_{60}^{01}\)` as follows
+
+`\begin{align*}
+_{10}p_{60}^{01} &amp;= \int_0^{10}\ _tp_{60}^{00}\cdot \mu_{60+t}^{01}\cdot _{10-t}p_{60+t}^{11} dt.
+\end{align*}`
+
+We use .KULbginline[numerical integration] to evaluate this probability. 
+
+---
+
+class: clear
+
+.pull-left[
+
+We define the necessary constants (see the book)
+
+
+```r
+a1 = 4e-4
+a2 = 5e-4
+b1 = 3.4674e-6
+b2 = 7.5858e-5
+c1 = 0.138155
+c2 = 0.087498
+```
+
+For `\(_tp_{60}^{00}\)`
+
+
+```r
+p00 = function(t, age, a1, b1, c1, a2, b2, c2) {
+  p1 = (a1 + a2) * t
+  p2 = (b1 / c1) * exp(age * c1) * (exp(c1 * t) - 1)
+  p3 = (b2 / c2) * exp(age * c2) * (exp(c2 * t) - 1)
+  prob = exp(-(p1 + p2 + p3))
+  return(prob)
+}
+
+p00(10, 60, a1, b1, c1, a2, b2, c2)
+## [1] 0.5839526
+```
+
+]
+
+.pull-right[
+
+Similarly, for `\(_tp_{60}^{11}\)`
+
+
+```r
+p11 = function(t, age, a1, b1, c1, a2, b2, c2) {
+  p1 = a2 * t
+  p2 = (b2 / c2) * exp(age * c2) * (exp(c2 * t) - 1)
+  prob = exp(-(p1 + p2))
+  return(prob)
+}
+
+p11(10, 60, a1, b1, c1, a2, b2, c2)
+## [1] 0.7897179
+```
+
+For the transition intensity `\(\mu_x^{01}\)` we have
+
+
+```r
+mu01 = function(age, a1, b1, c1, a2, b2, c2) {
+  return(a1 + b1 * exp(c1 * age))
+}
+```
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+Putting it all together we define the function `\(_tp_x^{01}\)` we wish to integrate
+
+
+```r
+p01integrand = function(t, age, end, 
+                        a1, b1, c1, a2, b2, c2) {
+  p1 = p00(t, age, a1, b1, c1, a2, b2, c2)
+  p2 = mu01(age + t, a1, b1, c1, a2, b2, c2)
+  p3 = p11(end - t, age + t, a1, b1, c1, 
+           a2, b2, c2)
+  prob = p1 * p2 * p3
+  return(prob)
+}
+```
+
+`integrate(f, lower, upper, ...)` in R integrates the function `f` from `lower` to `upper`. 
+
+]
+
+.pull-right[
+
+We use the `integrate()` function in R to perform the numerical integration. 
+
+We let `\(t\)` run from 0 to 10 and specify age `\(x = 60\)`. 
+
+
+```r
+integrate(
+  p01integrand,
+  lower = 0,
+  upper = 10,
+  age = 60,
+  end = 10,
+  a1,
+  b1,
+  c1,
+  a2,
+  b2,
+  c2
+)
+```
+
+
+```
+## 0.2057653 with absolute error &lt; 2.3e-15
+```
+
+]
+
+---
+
+class: clear
+
+Avoiding the juggling with multiple functions, we can also define `\(_tp_x^{01}\)` in a single step, as follows
+
+
+```r
+p01_single &lt;- function(x, a1, a2, b1, b2, c1, c2) {
+  p = exp(-((a1 + a2) * x + b1 / c1 * exp(60 * c1) * (exp(c1 * x) - 1) + 
+              b2 / c2 * exp(60 * c2) * (exp(c2 * x) - 1))) * 
+    exp(-(a2 * (10 - x) + b2 / c2 * exp((60 + x) * c2) * (exp(c2 * (10 - x)) - 1)))
+  p * (a1 + b1 * exp(c1 * (60 + x)))
+}
+
+integrate(
+  p01_single,
+  0,
+  10,
+  a1 = a1,
+  a2 = a2,
+  b1 = b1,
+  b2 = b2,
+  c1 = c1,
+  c2 = c2
+)
+## 0.2057653 with absolute error &lt; 2.3e-15
+```
+
+---
+
+class: clear
+
+Dickson et al. (2013, 2nd edition) discuss in Appendix B the trapezium rule and the Simpson rule to evaluate
+
+`\begin{align*}
+I &amp;= \int_a^b f(x) dx,
+\end{align*}`
+for some function `\(f\)`. 
+
+--
+
+With the .KULbginline[trapezium rule]: 
+
+let `\(h = (b-a)/n\)`
+
+`\begin{align*}
+I &amp;\approx h \left(\frac{1}{2}f(a) + \sum_{j=1}^{n-1} f(a+j \cdot h) + \frac{1}{2}f(b).\right)
+\end{align*}`
+
+--
+
+With the .KULbginline[Simpson rule]: 
+
+with `\(h = (b-a)/2n\)` or `\(n = (b-a)/(2h)\)`
+
+`\begin{align*}
+I &amp;\approx h/3 \left(f(a) + 4\sum_{j=1}^{n} f(a+(2j-1)\cdot h) + 2\sum_{j=1}^{n-1} f(a+2j\cdot h) + f(b).\right)
+\end{align*}`
+
+---
+
+class: clear
+
+We now re-evaluate `\(_{10}p_{60}^{01} = \int_0^{10}\ _tp_{60}^{00}\cdot \mu_{60+t}^{01}\cdot _{10-t}p_{60+t}^{11} dt\)`.
+
+
+```r
+h     = 1 / 12
+a     = 0
+b     = 10
+age   = 60
+grid  = seq(from = a, to = b, by = h)
+ngrid = length(grid)
+
+f = p00(`grid`, `age`, a1, b1, c1, a2, b2, c2) * mu01(`age + grid`, a1, b1, c1, a2, b2, c2) *
+    p11(`10 - grid`, `age + grid`, a1, b1, c1, a2, b2, c2)
+```
+
+
+
+With the trapezium rule
+
+
+```r
+(inttrap = h * (0.5 * f[1] + sum(f[2:(ngrid - 1)]) + 0.5 * f[ngrid]))
+## [1] 0.2057661
+```
+
+With the Simpson rule
+
+
+```r
+n = (b - a) / (2 * h)
+(intSimp =
+    (h / 3) * (f[1] + 4 * sum(f[2 * 1:n]) + 2 * sum(f[2 * 1:(n - 1) + 1]) +
+                 f[ngrid]))
+## [1] 0.2057653
+```
+
+---
+
+# The disability income model - Example 8.5
+
+
+.pull-left[ 
+
+Section 8.5 in the Dickson et al. (2013, 2nd edition) book puts focus on the numerical evaluation of transition probabilities in multiple state models. 
+
+We now move on with Example 8.5 on the .hi-pink[disability income model], as pictured on the right.
+
+We specify: 
+
+`\begin{align*}
+\mu_x^{01} &amp;= a_1+b_1\exp{(c_1x)} \\
+\mu_x^{02} &amp;= a_2+b_2\exp{(c_2x)} \\
+\mu_x^{10} &amp;= 0.1 \cdot \mu_x^{01} \\
+\mu_x^{12} &amp;= \mu_x^{02}.
+\end{align*}`
+
+The goal is then to calculate
+
+`\begin{align*}
+&amp; _{10}p_{60}^{00}\\
+&amp; _{10}p_{60}^{01}.
+\end{align*}`
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="img/disability_income.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+]
+
+---
+
+class: clear
+
+We use the .KULbginline[Kolmogorov forward equations]: 
+
+`\begin{align*}
+\frac{d}{dt}\ _tp_x^{ij} &amp;= \sum_{k=0,k\neq j}^n \left(_tp_x^{ik}\mu_{x+t}^{kj}-\ _{t}p_x^{ij}\mu_{x+t}^{jk}\right),
+\end{align*}`
+
+rewritten as
+
+`\begin{align*}
+_{t+h}p_x^{ij} &amp;=\ _{t}p_x^{ij}-h\sum_{k=0,k\neq j}^n \left(_tp_x^{ij}\mu_{x+t}^{jk}-\ _tp_x^{ik}\mu_{x+t}^{kj}\right)+o(h).
+\end{align*}`
+
+--
+
+For this particular application we get:
+
+`\begin{align*}
+_{t+h}p_{60}^{00} &amp;= \ _{t}p_{60}^{00}-h\ _tp_{60}^{00}(\mu_{60+t}^{01}+\mu_{60+t}^{02})+h\ _tp_{60}^{01}\mu_{60+t}^{10}+o(h),
+\end{align*}`
+
+and
+
+`\begin{align*}
+_{t+h}p_{60}^{01} &amp;=\ _{t}p_{60}^{01}-h\ _tp_{60}^{01}(\mu_{60+t}^{12}+\mu_{60+t}^{10})+h\ _tp_{60}^{00}\mu_{60+t}^{01}+o(h).
+\end{align*}`
+
+---
+
+class: clear
+
+We define the transition intensities
+
+
+```r
+mu01 &lt;- function(a1, b1, c1, x) a1 + b1 * exp(c1 * x) 
+mu10 &lt;- function(a1, b1, c1, x) 0.1 * mu01(a1, b1, c1, x)
+mu02 &lt;- function(a2, b2, c2, x) a2 + b2 * exp(c2 * x)
+mu12 &lt;- mu02
+```
+
+We define a function to evaluate the rhs of the expressions on the previous sheet:
+
+
+```r
+## Kolmogorov equations 
+thP00 &lt;- function(`tP00, tP01, h, x`) 
+  tP00 - h * tP00 * (mu01(a1, b1, c1, x) + mu02(a2, b2, c2, x)) + h * tP01 * mu10(a1, b1, c1, x)
+thP01 &lt;- function(`tP00, tP01, h, x`)
+  tP01 - h * tP01 * (mu12(a2, b2, c2, x) + mu10(a1, b1, c1, x)) + h * tP00 * mu01(a1, b1, c1, x)
+```
+
+
+
+We use the above to evaluate `\(_tp_{60}^{00}\)` for `\(t = 1/12\)`, starting from `\(_0p_{60}^{00}=1\)` and `\(_0p_{60}^{01}=0\)`.
+
+
+```r
+thP00(1, 0, 1 / 12, 60) # Table 8.1, second row, column tP^{00}_{60}
+## [1] 0.9975702
+```
+
+In a similar way, for `\(_tp_{60}^{01}\)` for `\(t = 1/12\)`
+
+
+```r
+thP01(1, 0, 1 / 12, 60) # Table 8.1, second row, column tP^{01}_{60}
+## [1] 0.001183657
+```
+
+---
+
+class: clear
+
+
+```r
+## Reproduction table 8.1
+Results = matrix(NA, 12 * 10 + 1, 2)
+Results[1, ] = c(thP00(1, 0, 0, 60), thP01(1, 0, 0, 60))
+for(i in 1:(12 * 10)) {
+  Results[i + 1, ] = c(thP00(Results[i, 1], Results[i, 2], 1 / 12, 60 + (i - 1) * 1 / 12),
+                       thP01(Results[i, 1], Results[i, 2], 1 / 12, 60 + (i - 1) * 1 / 12))
+}
+head(Results)
+##           [,1]        [,2]
+## [1,] 1.0000000 0.000000000
+## [2,] 0.9975702 0.001183657
+## [3,] 0.9951243 0.002376098
+## [4,] 0.9926623 0.003577357
+## [5,] 0.9901841 0.004787465
+## [6,] 0.9876898 0.006006455
+tail(Results)
+##             [,1]      [,2]
+## [116,] 0.6091143 0.1925074
+## [117,] 0.6048221 0.1945329
+## [118,] 0.6005199 0.1965584
+## [119,] 0.5962082 0.1985837
+## [120,] 0.5918870 0.2006084
+## [121,] 0.5875568 0.2026324
+```
+
+---
+
+class: clear
+
+
+```r
+t = seq(0, 10, by = 1 / 12)
+Table8.1 = cbind.data.frame(t = t,
+                            mu01 = mu01(a1, b1, c1, 60 + t), 
+                            mu02 = mu02(a2, b2, c2, 60 + t),
+                            mu10 = mu10(a1, b1, c1, 60 + t),
+                            mu12 = mu12(a2, b2, c2, 60 + t),
+                            thP00 = Results[, 1],
+                            thP01 = Results[, 2])
+head(round(Table8.1, 5))
+##         t    mu01    mu02    mu10    mu12   thP00   thP01
+## 1 0.00000 0.01420 0.01495 0.00142 0.01495 1.00000 0.00000
+## 2 0.08333 0.01436 0.01506 0.00144 0.01506 0.99757 0.00118
+## 3 0.16667 0.01453 0.01517 0.00145 0.01517 0.99512 0.00238
+## 4 0.25000 0.01469 0.01527 0.00147 0.01527 0.99266 0.00358
+## 5 0.33333 0.01485 0.01538 0.00149 0.01538 0.99018 0.00479
+## 6 0.41667 0.01502 0.01549 0.00150 0.01549 0.98769 0.00601
+tail(round(Table8.1, 5))
+##            t    mu01    mu02    mu10    mu12   thP00   thP01
+## 116  9.58333 0.05228 0.03393 0.00523 0.03393 0.60911 0.19251
+## 117  9.66667 0.05288 0.03418 0.00529 0.03418 0.60482 0.19453
+## 118  9.75000 0.05349 0.03442 0.00535 0.03442 0.60052 0.19656
+## 119  9.83333 0.05410 0.03467 0.00541 0.03467 0.59621 0.19858
+## 120  9.91667 0.05473 0.03492 0.00547 0.03492 0.59189 0.20061
+## 121 10.00000 0.05535 0.03517 0.00554 0.03517 0.58756 0.20263
+```
+
+---
+
+class: inverse, center, middle
+name: premiums
+
+# Premium calculations
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+
+---
+
+# Premium calculations - Example 8.6
+
+.pull-left[
+
+In this example we value: 
+
+* a 10-year disability income product
+* issued to a healthy (60)
+* interest rate of 5% per year.
+
+Part (a) of this exercise considers:
+
+* premiums payable continuously in the healthy state
+* benefit of 20 000 EUR per year payable continuously in the disabled state
+* death benefit of 50 000 EUR on death.
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="img/disability_income.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+]
+
+---
+
+class: clear
+
+We initialize some given constants
+
+
+```r
+i     = 0.05
+delta = log(1 + i)
+h     = 1/12
+a     = 0
+b     = 10
+n     = (b - a) / (2 * h)
+grid  = seq(0, 10, by = h)
+ngrid = length(grid)
+```
+
+Following the Dickson et al. (2013) book we use the .KULbginline[trapezium] and .KULbginline[Simpson's rule] to numerically evaluate the integrals. 
+
+
+```r
+# discounting
+dis      = numeric(ngrid)
+dis      = exp(-delta * grid)
+```
+
+We extract the variables from our reproduction of Table 8.1 in the book
+
+
+```r
+list2env(Table8.1[, c("mu02", "mu12", "thP00", "thP01")], envir = .GlobalEnv)
+## &lt;environment: R_GlobalEnv&gt;
+```
+
+
+---
+
+class: clear
+
+.pull-left[
+
+For the .KULbginline[EPV of the premiums] we evaluate
+
+`\begin{align*}
+P \cdot \bar{a}_{60:\overline{10}|}^{00} &amp;= P\int_0^{10} e^{-\delta t} \ _tp_{60}^{00} dt,
+\end{align*}`
+
+with `\(P\)` the annual premium rate.
+
+The premiums are continuously payable while in the healthy state.
+
+The book reports a value of `\(P \cdot 6.5714\)`. 
+
+Let's check this in `R`!
+
+]
+
+.pull-right[
+
+
+```r
+## EPV of premium income ##
+thP00dis = dis * thP00
+
+# using trapezium rule
+(intprem =
+    h * (0.5 * thP00dis[1] + 
+         sum(thP00dis[2:(ngrid - 1)]) + 
+         0.5 * thP00dis[ngrid]))
+## [1] 6.571398
+
+# using Simpson's rule
+(intprem =
+    (h / 3) * (thP00dis[1] + 
+               4 * sum(thP00dis[2 * 1:n]) + 
+               2 * sum(thP00dis[2 * 1:(n - 1) + 1]) + 
+               thP00dis[ngrid]))
+## [1] 6.571382
+```
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+For the .KULbginline[EPV of the sickness benefit] we evaluate
+
+`\begin{align*}
+20\ 000\cdot \bar{a}_{60:\overline{10}|}^{01} &amp;= 20\ 000 \int_0^{10} e^{-\delta t}\ _tp_{60}^{01} dt.
+\end{align*}`
+
+The sickness benefits are continuously payable while in the sickness state.
+
+The book reports a value of `\(20\ 000 \cdot 0.66359\)`. 
+
+Let's check this in `R`!
+
+]
+
+.pull-right[
+
+
+```r
+## EPV of sickness benefit ##
+thP01dis = dis * thP01
+
+# using trapezium rule
+(intsick = h * (0.5 * thP01dis[1] + 
+                sum(thP01dis[2:(ngrid - 1)]) + 
+                0.5 * thP01dis[ngrid]))
+## [1] 0.6635877
+
+# using Simpson's rule
+(intsick = (h / 3) * (thP01dis[1] + 
+              4 * sum(thP01dis[2 * 1:n]) + 
+              2 * sum(thP01dis[2 * 1:(n - 1) + 1]) + 
+              thP01dis[ngrid]))
+## [1] 0.6635908
+```
+
+]
+
+---
+
+class: clear
+
+.pull-left[
+
+The .KULbginline[EPV of the death benefit] becomes
+
+`\begin{align*}
+&amp; 50\ 000\cdot \bar{A}_{60:\overline{10}|}^{02} \\ 
+&amp;= 50\ 000\int_0^{10} e^{-\delta t}\left(_tp_{60}^{00}\cdot \mu_{60+t}^{02}+\ _tp_{60}^{01}\cdot \mu_{60+t}^{12} \right) dt.
+\end{align*}`
+
+The death benefit is paid upon transition into the dead state.
+
+The book reports a value of `\(50\ 000 \cdot 0.16231\)`.
+]
+
+.pull-right[
+
+
+```r
+## EPV of death benefit ##
+fdis = dis * (thP00 * mu02 + thP01 * mu12)
+
+# using trapezium rule
+(intdeath = h * (0.5 * fdis[1] + 
+                 sum(fdis[2:(ngrid - 1)]) + 
+                 0.5 * fdis[ngrid]))
+## [1] 0.1623143
+
+# using Simpson's rule
+(intdeath = (h / 3) * (fdis[1] + 
+                  4 * sum(fdis[2 * 1:n]) + 
+                  2 * sum(fdis[2 * 1:(n - 1) + 1]) + 
+                  fdis[ngrid]))
+## [1] 0.1623145
+```
+
+Putting the actuarial equivalence relation together and solving for `\(P\)` we find
+
+
+```r
+(P = (20000 * intsick + 50000 * intdeath) / intprem)
+## [1] 3254.649
+```
+
+]
+
+---
+
+class: inverse, center, middle
+name: policyvalues
+
+# Policy values
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Policy values - Example 8.7
+
+.pull-left[
+
+In this example we work with the .hi-pink[disability income model]. 
+
+Suppose that `\(x=40\)`, `\(n=20\)`, `\(\delta=0.04\)`, `\(B=100\ 000\)` and `\(S=500\ 000\)` and
+
+`\begin{align*}
+\mu_x^{01} &amp;= a_1+b_1\exp{(c_1x)} \\
+\mu_x^{10} &amp;= 0.1\cdot \mu_x^{01} \\
+\mu_x^{20} &amp;= a_2+b_2\exp{(c_2x)} \\
+\mu_x^{12} &amp;= \mu_x^{02}.
+\end{align*}`
+
+We now calculate 
+
+`\(_{10}V^{(0)}\)`, `\(_{10}V^{(1)}\)` and `\(_0V^{(0)}\)` 
+
+for `\(n=20\)` given that `\(P=5\ 500\)`.
+
+]
+
+.pull-right[
+
+.center[
+&lt;img src="img/disability_income.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+]
+
+---
+
+class: clear
+
+For policy value calculations in multiple state models we use .KULbginline[Thiele's differential equations].
+
+That is: for `\(i=0,1,\ldots,n\)` and `\(0\leq t\leq n\)`
+
+`\begin{align*}
+\frac{d}{dt}\ _tV^{(i)} &amp;= \delta_t\cdot\ _tV^{(i)}-B_t^{(i)}-\sum_{j=0,j\neq i}^n\mu_{x+t}^{ij}\left(S_t^{(ij)}+\ _tV^{(j)}-\ _tV^{(i)}\right).
+\end{align*}`
+
+--
+
+Applied to the specific context of this example, and after some rewriting (see the sheets), we find (approximately)
+
+`\begin{align*}
+_{t-h}V^{(0)} &amp;=\ _tV^{(0)}(1-\delta h)-Ph+h\mu_{x+t}^{01}(_tV^{(1)}-_tV^{(0)})+h\mu_{x+t}^{02}(S-_tV^{(0)}),
+\end{align*}`
+
+and
+
+`\begin{align*}
+_{t-h}V^{(1)} &amp;=\ _tV^{(1)}(1-\delta h)+Bh+h\mu_{x+t}^{10}(_tV^{(0)}-_tV^{(1)})+h\mu_{x+t}^{12}(S-_tV^{(1)}).
+\end{align*}`
+
+With the above recursions, we work backwards!
+
+
+---
+
+class: clear
+
+.pull-left[
+
+Some constants
+
+
+```r
+x = 40
+n = 20
+d = 0.04
+B = 100000
+S = 500000
+P = 5500
+```
+
+and
+
+
+```r
+tV0 = 0
+tV1 = 0
+h   = 1/12
+```
+
+
+]
+
+.pull-right[
+
+For the transition intensities
+
+
+```r
+a1 = 4e-4
+a2 = 5e-4
+b1 = 3.4674e-6
+b2 = 7.5858e-5
+c1 = 0.138155
+c2 = 0.087498
+mu01 &lt;- function(x) a1 + b1 * exp(c1 * (x))
+mu10 &lt;- function(x) 0.1 * mu01(x)
+mu02 &lt;- function(x) a2 + b2 * exp(c2 * (x))
+mu12 &lt;- mu02
+```
+
+Starting from `\(_nV^{(0)}=0\)` and `\(_nV^{(1)}=0\)` with `\(n = 20\)`, can we find the `\(_tV^{(0)}\)` and `\(_tV^{(1)}\)` at `\(t = 10\)` and `\(t = 0\)`?
+
+We use a step size `h   = 1/12` and divide a 10-year period in 120 steps. 
+
+We reason backwards!
+
+]
+
+---
+
+class: clear
+
+Now we solve Thiele's differential equations with the Euler method and a step size `h   = 1/12`
+
+
+```r
+for(i in seq_len(120 * 2)) {
+  tV0[i + 1] = tV0[i] * (1 - d * h) - P * h + h * mu01(x + n - ((i - 1) * h)) * (tV1[i] - tV0[i]) + 
+    h * mu02(x + n - ((i - 1) * h)) * (S - tV0[i])
+  tV1[i + 1] = tV1[i] * (1 - d * h) + B * h + h * mu10(x + n - ((i - 1) * h)) * (tV0[i] - tV1[i]) + 
+    h * mu12(x + n - ((i - 1) * h)) * (S - tV1[i])
+}
+```
+
+Starting from (at time `\(n = 20\)`)
+
+```r
+tV0[1]; tV1[1]
+## [1] 0
+## [1] 0
+```
+
+Ultimately, we retrieve (for `P = 5500`) at time `\(n = 10\)` and `\(n = 0\)`
+
+```r
+tV0[120 + 1] ; tV1[120 + 1]
+## [1] 18083.95
+## [1] 829731.3
+tV0[120 * 2 + 1]
+## [1] 3815.348
+```
+
+Now you can rerun the code and find the results corresponding to `P = 6000`!
+
+---
+
+class: clear
+
+Alternatively, we search the equivalence premium `\(P\)` for which `\(_0V^{(0)} = 0\)`.
+
+
+```r
+## Finding the equivalence premium by defining a function and using the function uniroot ##
+f &lt;- function(P, decades = 2) {
+
+for(i in seq_len(120 * decades)) {
+    tV0[i + 1] = tV0[i] * (1 - d * h) - P * h + h * mu01(x + n - ((i - 1) * h)) * (tV1[i] - tV0[i]) + 
+      h * mu02(x + n - ((i - 1) * h)) * (S - tV0[i])
+    tV1[i + 1] = tV1[i] * (1 - d * h) + B * h + h * mu10(x + n - ((i - 1) * h)) * (tV0[i] - tV1[i]) + 
+      h * mu12(x + n - ((i - 1) * h)) * (S - tV1[i])
+  }
+return(tV0[120 * decades + 1])
+}
+```
+
+We search the premium `\(P\)`, say between 5 000 and 6 000, for which the above function becomes zero. 
+
+
+```r
+(P = uniroot(f, c(5e3, 6e3))$root)
+## [1] 5796.594
+```
+
+Assuming `\(_0V^{(0)}\)` is a linear function of `\(P\)` the book retrieved a value of 5796.59 for the equivalence premium. 
+
+---
+
+# Thanks!  &lt;img src="img/xaringan.png" class="title-hex"&gt;
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+Slides created with the R package [xaringan](https://github.com/yihui/xaringan).
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+Course material available via 
+&lt;br&gt;
+&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 496 512"&gt;&lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/&gt;&lt;/svg&gt; https://github.com/katrienantonio/mortality-dynamics
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLanguage": "R",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"highlightSpans": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
