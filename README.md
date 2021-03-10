@@ -4,9 +4,9 @@
 by Katrien Antonio, Bavo Campo and Sander Devriendt.
 
 Course materials for the *Advanced Life Insurance Mathematics* course
-taught in academic year 2019-2020 at KU Leuven.
+taught in academic year 2020-2021 at KU Leuven.
 
-📆 March - June, 2020 <br> 🕒 approx. 2-3h per computer lab <br> 📍
+📆 March - June, 2021 <br> 🕠 approx. 2-3h per computer lab <br> 📍
 Advanced Life Insurance Mathematics class at KU Leuven
 
 ## Goals of the computer labs
@@ -19,14 +19,14 @@ course.
 
 The schedule is subject to small changes.
 
-| Description                                                 | Lecture material                                                                                                        | R script                                                                                    | R solutions |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------- |
-| Computer lab 1 - Getting mortality data                     | [sheets data](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_1.html#data)                 | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R) |             |
-| Computer lab 1 - Parametric mortality laws                  | [sheets mortality laws](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_1.html#parametric) | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R) |             |
-| Computer lab 2 - Fitting Lee Carter with iterative LS       | [sheets iterative LS](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_2.html#LS)           | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_2.R) |             |
-| Computer lab 2 - Fitting Lee Carter with Poisson likelihood | [sheets Poisson](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_2.html#POI)               | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_2.R) |             |
-| Computer lab 2 - Forecasting with Lee Carter                | [sheets forecasting](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_2.html#forecasting)   | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_2.R) |             |
-| Computer lab 3 - Multiple state models                      | [sheets multi-state](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_3.html)               | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_3.R) |             |
+| Description                                                 | Lecture material                                                                                                                   | R script                                                                                    | R solutions |
+| ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------- |
+| Computer lab 1 - Getting mortality data                     | [sheets data](https://katrienantonio.github.io/mortality-dynamics/sheets/2021-03-10-ALIM_computer_lab_1.html#data)                 | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R) |             |
+| Computer lab 1 - Parametric mortality laws                  | [sheets mortality laws](https://katrienantonio.github.io/mortality-dynamics/sheets/2021-03-10-ALIM_computer_lab_1.html#parametric) | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_1.R) |             |
+| Computer lab 2 - Fitting Lee Carter with iterative LS       | [sheets iterative LS](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_2.html#LS)                      | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_2.R) |             |
+| Computer lab 2 - Fitting Lee Carter with Poisson likelihood | [sheets Poisson](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_2.html#POI)                          | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_2.R) |             |
+| Computer lab 2 - Forecasting with Lee Carter                | [sheets forecasting](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_2.html#forecasting)              | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_2.R) |             |
+| Computer lab 3 - Multiple state models                      | [sheets multi-state](https://katrienantonio.github.io/mortality-dynamics/sheets/ALIM_computer_lab_3.html)                          | [script](https://katrienantonio.github.io/mortality-dynamics/scripts/ALIM_computer_lab_3.R) |             |
 
 ## Software requirements
 
@@ -58,9 +58,7 @@ suppressMessages(packages <- lapply(packages, FUN = function(x) {
 
 We provide a back-up plan in case your local installation of R (and the
 necessary packages) is not working properly. Please join our project on
-RStudio Cloud via the following link
-
-<https://rstudio.cloud/spaces/55584/join?access_code=hnHmPmSNsbu8BdEBJkeMXNPtHBelpnnJBAmF9XTH>
+RStudio Cloud via the link posted on TOLEDO.
 
 After creating an account for RStudio you will be able to work with the
 scripts and data sets in the cloud.
